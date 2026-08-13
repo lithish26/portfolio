@@ -3,8 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Your Name — Portfolio</title>
+
+  <title>Alex — Developer Portfolio</title>
+
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap');
+
     * {
       margin: 0;
       padding: 0;
@@ -12,11 +16,13 @@
     }
 
     :root {
-      --bg: #0f172a;
-      --card: #1e293b;
-      --text: #f8fafc;
-      --muted: #94a3b8;
-      --accent: #38bdf8;
+      --bg: #070b14;
+      --card: rgba(15, 23, 42, 0.65);
+      --text: #f1f5f9;
+      --muted: #8995aa;
+      --cyan: #22d3ee;
+      --purple: #a78bfa;
+      --border: rgba(148, 163, 184, 0.12);
     }
 
     html {
@@ -24,178 +30,478 @@
     }
 
     body {
-      font-family: Arial, sans-serif;
+      font-family: "Inter", sans-serif;
       background: var(--bg);
       color: var(--text);
       line-height: 1.6;
+      overflow-x: hidden;
     }
 
+    /* Background glow */
+    body::before {
+      content: "";
+      position: fixed;
+      width: 500px;
+      height: 500px;
+      background: var(--cyan);
+      filter: blur(180px);
+      opacity: 0.08;
+      top: -200px;
+      left: -150px;
+      z-index: -1;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      width: 450px;
+      height: 450px;
+      background: var(--purple);
+      filter: blur(180px);
+      opacity: 0.08;
+      right: -150px;
+      bottom: -150px;
+      z-index: -1;
+    }
+
+    /* Navbar */
     nav {
-      max-width: 1000px;
+      width: 90%;
+      max-width: 1050px;
       margin: auto;
-      padding: 20px;
+      padding: 25px 0;
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
 
-    nav a {
-      color: var(--text);
-      text-decoration: none;
-      margin-left: 20px;
-    }
-
-    nav a:hover {
-      color: var(--accent);
-    }
-
-    .hero {
-      min-height: 80vh;
-      max-width: 1000px;
-      margin: auto;
-      padding: 120px 20px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-
-    .hero p {
-      color: var(--accent);
-      margin-bottom: 10px;
-    }
-
-    h1 {
-      font-size: clamp(2.8rem, 8vw, 5rem);
-      line-height: 1.1;
-    }
-
-    h2 {
-      margin-bottom: 25px;
-      font-size: 2rem;
-    }
-
-    .hero h2 {
-      color: var(--muted);
-      font-weight: normal;
-      margin-top: 10px;
-    }
-
-    .hero .btn {
-      display: inline-block;
-      margin-top: 25px;
-      padding: 12px 20px;
-      width: fit-content;
-      background: var(--accent);
-      color: #082f49;
-      text-decoration: none;
-      border-radius: 6px;
+    .logo {
+      font-family: "Space Mono", monospace;
+      color: var(--cyan);
+      font-size: 1.1rem;
       font-weight: bold;
     }
 
-    section {
-      max-width: 1000px;
-      margin: auto;
-      padding: 80px 20px;
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 28px;
     }
 
-    .about {
+    nav a {
       color: var(--muted);
-      max-width: 700px;
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: 0.3s;
     }
 
+    nav a:hover {
+      color: var(--cyan);
+    }
+
+    /* Hero */
+    .hero {
+      width: 90%;
+      max-width: 1050px;
+      min-height: 78vh;
+      margin: auto;
+      display: flex;
+      align-items: center;
+    }
+
+    .hero-content {
+      max-width: 750px;
+    }
+
+    .tag {
+      font-family: "Space Mono", monospace;
+      color: var(--cyan);
+      font-size: 0.85rem;
+      margin-bottom: 18px;
+    }
+
+    .tag::before {
+      content: "> ";
+      color: var(--purple);
+    }
+
+    h1 {
+      font-size: clamp(3rem, 8vw, 6rem);
+      line-height: 1;
+      letter-spacing: -4px;
+      margin-bottom: 20px;
+    }
+
+    h1 span {
+      color: var(--cyan);
+      text-shadow: 0 0 30px rgba(34, 211, 238, 0.25);
+    }
+
+    .hero-description {
+      color: var(--muted);
+      max-width: 600px;
+      font-size: 1.05rem;
+      margin-bottom: 30px;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 11px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: 0.3s;
+    }
+
+    .primary {
+      background: var(--cyan);
+      color: #041014;
+      font-weight: 600;
+    }
+
+    .primary:hover {
+      box-shadow: 0 0 25px rgba(34, 211, 238, 0.3);
+      transform: translateY(-2px);
+    }
+
+    .secondary {
+      color: var(--text);
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .secondary:hover {
+      border-color: var(--purple);
+      color: var(--purple);
+    }
+
+    /* Sections */
+    section {
+      width: 90%;
+      max-width: 1050px;
+      margin: auto;
+      padding: 90px 0;
+    }
+
+    .section-title {
+      font-family: "Space Mono", monospace;
+      font-size: 0.85rem;
+      color: var(--cyan);
+      margin-bottom: 35px;
+    }
+
+    .section-title::before {
+      content: "// ";
+      color: var(--purple);
+    }
+
+    /* About */
+    .about {
+      max-width: 700px;
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    /* Skills */
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 25px;
+    }
+
+    .skill {
+      padding: 8px 14px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.025);
+      color: #b8c4d6;
+      font-family: "Space Mono", monospace;
+      font-size: 0.75rem;
+    }
+
+    .skill:hover {
+      color: var(--cyan);
+      border-color: rgba(34, 211, 238, 0.4);
+    }
+
+    /* Projects */
     .projects {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
     }
 
-    .card {
-      background: var(--card);
+    .project {
       padding: 25px;
-      border-radius: 10px;
+      min-height: 220px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: var(--card);
+      backdrop-filter: blur(12px);
+      transition: 0.3s;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
 
-    .card h3 {
+    .project:hover {
+      transform: translateY(-6px);
+      border-color: rgba(34, 211, 238, 0.35);
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
+    }
+
+    .project-number {
+      font-family: "Space Mono", monospace;
+      color: var(--purple);
+      font-size: 0.75rem;
+    }
+
+    .project h3 {
+      margin: 18px 0 8px;
+      font-size: 1.1rem;
+    }
+
+    .project p {
+      color: var(--muted);
+      font-size: 0.85rem;
+    }
+
+    .project-link {
+      color: var(--cyan);
+      text-decoration: none;
+      font-size: 0.8rem;
+      margin-top: 20px;
+    }
+
+    /* Contact */
+    .contact-box {
+      border: 1px solid var(--border);
+      background: linear-gradient(
+        135deg,
+        rgba(34, 211, 238, 0.05),
+        rgba(167, 139, 250, 0.05)
+      );
+      border-radius: 14px;
+      padding: 45px;
+      text-align: center;
+    }
+
+    .contact-box h2 {
+      font-size: 2rem;
       margin-bottom: 10px;
     }
 
-    .card p {
+    .contact-box p {
       color: var(--muted);
+      margin-bottom: 25px;
     }
 
-    .contact a {
-      color: var(--accent);
+    .email {
+      color: var(--cyan);
       text-decoration: none;
     }
 
+    /* Footer */
     footer {
-      text-align: center;
-      padding: 30px;
+      width: 90%;
+      max-width: 1050px;
+      margin: auto;
+      padding: 30px 0;
+      border-top: 1px solid var(--border);
       color: var(--muted);
-      border-top: 1px solid #1e293b;
+      font-size: 0.75rem;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    /* Mobile */
+    @media (max-width: 750px) {
+      nav ul {
+        gap: 12px;
+      }
+
+      nav a {
+        font-size: 0.75rem;
+      }
+
+      h1 {
+        letter-spacing: -2px;
+      }
+
+      .hero {
+        min-height: 70vh;
+      }
+
+      .projects {
+        grid-template-columns: 1fr;
+      }
+
+      section {
+        padding: 65px 0;
+      }
+
+      .contact-box {
+        padding: 30px 20px;
+      }
+
+      footer {
+        flex-direction: column;
+        gap: 8px;
+      }
     }
   </style>
 </head>
 
 <body>
 
+  <!-- Navigation -->
   <nav>
-    <strong>Your Name</strong>
-    <div>
-      <a href="#about">About</a>
-      <a href="#projects">Projects</a>
-      <a href="#contact">Contact</a>
-    </div>
+    <div class="logo">alex.dev</div>
+
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
   </nav>
 
+
+  <!-- Hero -->
   <header class="hero">
-    <p>Hello, I'm</p>
-    <h1>Your Name</h1>
-    <h2>Web Developer & Designer</h2>
-    <p style="color: var(--muted); max-width: 600px;">
-      I build clean, responsive and user-friendly websites.
-    </p>
-    <a class="btn" href="#projects">View My Work</a>
+    <div class="hero-content">
+
+      <div class="tag">Hello, World!</div>
+
+      <h1>
+        I'm <span>Alex.</span>
+      </h1>
+
+      <p class="hero-description">
+        A developer who enjoys building clean, fast and
+        futuristic digital experiences.
+      </p>
+
+      <div class="buttons">
+        <a href="#projects" class="btn primary">View Projects</a>
+        <a href="#contact" class="btn secondary">Let's Talk</a>
+      </div>
+
+    </div>
   </header>
 
+
+  <!-- About -->
   <section id="about">
-    <h2>About Me</h2>
+
+    <div class="section-title">about_me</div>
+
     <p class="about">
-      I'm a passionate developer who enjoys turning ideas into simple,
-      beautiful and functional digital experiences. I work with HTML,
-      CSS, JavaScript and modern web technologies.
+      I'm a passionate developer focused on creating modern web
+      experiences. I love turning ideas into simple, functional
+      and visually appealing products.
     </p>
+
+    <div class="skills">
+      <span class="skill">HTML</span>
+      <span class="skill">CSS</span>
+      <span class="skill">JavaScript</span>
+      <span class="skill">React</span>
+      <span class="skill">Node.js</span>
+      <span class="skill">Git</span>
+    </div>
+
   </section>
 
+
+  <!-- Projects -->
   <section id="projects">
-    <h2>Projects</h2>
+
+    <div class="section-title">selected_projects</div>
 
     <div class="projects">
-      <div class="card">
-        <h3>Project One</h3>
-        <p>A clean and responsive website built with modern web technologies.</p>
+
+      <div class="project">
+        <div>
+          <div class="project-number">01</div>
+          <h3>Neon Dashboard</h3>
+          <p>
+            A futuristic analytics dashboard with a clean
+            interface and responsive layout.
+          </p>
+        </div>
+
+        <a href="#" class="project-link">View project →</a>
       </div>
 
-      <div class="card">
-        <h3>Project Two</h3>
-        <p>A simple web application focused on great user experience.</p>
+
+      <div class="project">
+        <div>
+          <div class="project-number">02</div>
+          <h3>AI Interface</h3>
+          <p>
+            A minimal AI-powered interface designed for
+            simplicity and productivity.
+          </p>
+        </div>
+
+        <a href="#" class="project-link">View project →</a>
       </div>
 
-      <div class="card">
-        <h3>Project Three</h3>
-        <p>A creative project showcasing my design and development skills.</p>
+
+      <div class="project">
+        <div>
+          <div class="project-number">03</div>
+          <h3>Dev Tools</h3>
+          <p>
+            A collection of useful developer tools built
+            with modern web technologies.
+          </p>
+        </div>
+
+        <a href="#" class="project-link">View project →</a>
       </div>
+
     </div>
+
   </section>
 
-  <section id="contact" class="contact">
-    <h2>Contact</h2>
-    <p>Have a project in mind? Let's talk.</p>
-    <p>Email: <a href="mailto:you@example.com">you@example.com</a></p>
+
+  <!-- Contact -->
+  <section id="contact">
+
+    <div class="contact-box">
+
+      <h2>Let's build something.</h2>
+
+      <p>
+        Have an idea or want to work together?
+      </p>
+
+      <a class="btn primary" href="mailto:hello@example.com">
+        Get In Touch
+      </a>
+
+      <br><br>
+
+      <a class="email" href="mailto:hello@example.com">
+        hello@example.com
+      </a>
+
+    </div>
+
   </section>
 
+
+  <!-- Footer -->
   <footer>
-    © 2026 Your Name. All rights reserved.
+    <span>© 2026 Alex</span>
+    <span>Built with HTML & CSS</span>
   </footer>
 
 </body>
